@@ -21,7 +21,7 @@ namespace Module05LINQ
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        Model1 db = new Model1();
         private string _connectionString = "Data Source =192.168.111.107; Initial Catalog = CRCMS_new; User ID = sa; Password = Mc123456";
         public MainWindow()
         {
@@ -86,6 +86,14 @@ namespace Module05LINQ
 
             IEnumerable<DataRow> model = ds.Tables["dic_Model"].AsEnumerable();
             
+        }
+
+        private void GetDocuments_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentListView.ItemsSource =
+            (from doc in db.Document
+             where doc.SmcsCode == "1000"
+             group doc by doc.CustomerId).ToList();
         }
     }
 }

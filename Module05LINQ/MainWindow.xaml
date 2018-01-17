@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0">
         <Button x:Name="GetResult" Click="GetResult_Click">Get Result</Button>
+        <Button x:Name="GetDocuments" Click="GetDocuments_Click">Get Document</Button>
+        </WrapPanel>
+        <TabControl Grid.Row="1">
+            <TabItem>
+                <ListView x:Name="DocumentListView">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="DocumentNumber" DisplayMemberBinding="{Binding Path=DocumentNumber}"></GridViewColumn>
+                                <GridViewColumn Header="DocumentCreateDate" DisplayMemberBinding="{Binding Path=DocumentCreateDate}"></GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
