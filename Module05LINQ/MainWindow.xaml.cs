@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using System.Data.Entity;
+
 namespace Module05LINQ
 {
     /// <summary>
@@ -90,10 +92,17 @@ namespace Module05LINQ
 
         private void GetDocuments_Click(object sender, RoutedEventArgs e)
         {
-            DocumentListView.ItemsSource =
-            (from doc in db.Document
-             where doc.SmcsCode == "1000"
-             group doc by doc.CustomerId).ToList();
+            var result = db.Timer.Where(w => w.UserId != 0 && w.AreaId == 19).Select(s => new
+            {
+                s.UserId,
+                s.AreaId,
+                s.DocumentId,
+                s.DateStart,
+                s.DateFinish,
+                Duration = DbFunctions.DiffSeconds(s.DateStart, s.DateFinish)
+            }).OrderBy(o => o.DateStart);
+
+            DocumentListView.ItemsSource = result.ToList();
         }
     }
 }

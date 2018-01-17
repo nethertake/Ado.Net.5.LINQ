@@ -21,8 +21,13 @@
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
-                                <GridViewColumn Header="DocumentNumber" DisplayMemberBinding="{Binding Path=DocumentNumber}"></GridViewColumn>
-                                <GridViewColumn Header="DocumentCreateDate" DisplayMemberBinding="{Binding Path=DocumentCreateDate}"></GridViewColumn>
+                                <GridViewColumn Header="UserId" DisplayMemberBinding="{Binding Path=UserId}"></GridViewColumn>
+                                <GridViewColumn Header="AreaId" DisplayMemberBinding="{Binding Path=AreaId}"></GridViewColumn>
+                                <GridViewColumn Header="DocumentId" DisplayMemberBinding="{Binding Path=DocumentId}"></GridViewColumn>
+                                <GridViewColumn Header="DateStart" DisplayMemberBinding="{Binding Path=DateStart}"></GridViewColumn>
+                                <GridViewColumn Header="DateFinish" DisplayMemberBinding="{Binding Path=DateFinish}"></GridViewColumn>
+                                <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Path=Duration}"></GridViewColumn>
+
                             </GridView.Columns>
                         </GridView>
                     </ListView.View>
