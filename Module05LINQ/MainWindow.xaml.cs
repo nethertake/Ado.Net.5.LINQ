@@ -104,5 +104,51 @@ namespace Module05LINQ
 
             DocumentListView.ItemsSource = result.ToList();
         }
+
+        private void GetData()
+        {
+
+            //1
+            var doc = db.Document.Where(w => (bool)w.IsArrived);
+            var sorted = doc.OrderBy(o => o.DocumentCreateDate);
+            //2
+            var doc2 = db.Document.Where(w => (bool)w.IsArrived).OrderBy(o => o.DocumentCreateDate);
+            //3
+            var doc3 = from w in db.Document
+                       where w.IsArrived == true
+                       orderby w.DocumentCreateDate
+                       select doc;
+            //keyword into
+            var query = from d in db.Document
+                        where d.IsArrived == true
+                        select d
+                        into noD 
+                        where noD.DocumentCreateDate != null
+                        select noD;
+            var queryL = db.Document.Where(w => w.IsArrived == true).Where(w => w.DocumentCreateDate != null);
+
+            //Создание оболочки
+
+            var queryTmp = from d in db.Document where d.IsArrived == true select d;
+
+            var queryTmp2 = from d in queryTmp where d.CreatedBy == "" select d;
+
+            var queryL1 = (db.Document.Where(w => w.IsArrived == true).Select(s => s.DocumentCreateDate)).Where(w => w.Value == DateTime.Now);
+
+            var initObject = from d in db.Document
+                             select new Docum()
+                             {
+                                 docNumber = d.DocumentNumber,
+                                 isArrive = (bool)d.IsArrived,
+                             };
+        }
+
+        public class Docum
+        {
+            public string docNumber { get; set;}
+            public bool isArrive { get; set; }
+        }
+
+
     }
 }
