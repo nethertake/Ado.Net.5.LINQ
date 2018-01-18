@@ -141,6 +141,54 @@ namespace Module05LINQ
                                  docNumber = d.DocumentNumber,
                                  isArrive = (bool)d.IsArrived,
                              };
+
+            var typeClass = initObject.GetType();
+
+
+            //инициализация объектов
+            IQueryable<Docum> initObjectL = from d in db.Document
+                                           select new Docum
+                                           {
+                                               docNumber = d.DocumentNumber,
+                                               isArrive = (bool)IsArrangeValid,
+                                           };
+
+            var initObjectLAnonim = db.Document.Select(s => new
+            {
+                docNumber = s.DocumentNumber
+            });
+
+
+        }
+
+
+        private void GetData2()
+        {
+            //ключевоее слово let
+            var q = from doc in db.Document
+                    let createDate = doc.DocumentCreateDate
+                    where createDate >= DateTime.Now
+                    select doc;
+        }
+
+        private void GetData3()
+        {
+            //where
+            var result = db.Document.Where(w => w.CabinetSE == 0);
+            result = result.Where((n, i) => n.CabinetSE == 1);
+            foreach (var item in result)
+            {
+
+            }
+
+            //take
+            result = result.Take(20);
+
+            //skip
+            //takewhile
+            //distinct
+            //skipwhile
+
         }
 
         public class Docum
